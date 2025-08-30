@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    command: ["start-dev"]
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    ports:
+      - "8081:8080"
+
+  opa:
+    image: openpolicyagent/opa:latest-envoy
+    command:
+      - run
+      - --server
+      - --config-file=/config/config.yaml
+      - /policies
+    volumes:
+      - ./opa/policy.rego:/policies/policy.rego:ro
+      - ./opa/config.yaml:/config/config.yaml:ro
+      - ./opa/data.json:/policies/data.json:ro
+    ports:
+      - "8181:8181"   # OPA REST (optional for debugging)
+      - "9191:9191"   # gRPC for Envoy ext_authz
+    depends_on:
+      - keycloak
+
+  app:
+    build: ./app
+    ports:
+      - "5000:5000"
+
+  envoy:
+    image: envoyproxy/envoy:v1.29.4
+    volumes:
+      - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
+    ports:
+      - "8080:8080"  # Gateway entry
+      - "9901:9901"  # Envoy admin
+    depends_on:
+      - app
+      - opa

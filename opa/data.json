@@ -1,0 +1,9 @@
+{
+  "keycloak": {
+    "client_id": "opa-introspect",
+    "client_secret": "CHANGEME"
+  },
+  "ti": {
+    "block_ips": []
+  }
+}

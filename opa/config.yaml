@@ -1,0 +1,6 @@
+plugins:
+  envoy_ext_authz:
+    addr: :9191
+    query: data.envoy.authz.allow
+decision_logs:
+  console: true
