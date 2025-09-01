@@ -5,5 +5,8 @@
   },
   "ti": {
     "block_ips": []
+  },
+  "debug": {
+    "skip_active_check": true
   }
 }
