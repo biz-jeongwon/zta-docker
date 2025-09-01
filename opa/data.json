@@ -1,12 +1,11 @@
 {
   "keycloak": {
     "client_id": "opa-introspect",
-    "client_secret": "1qgzXyPRLPCrAFtlf6vA0ZWQPTyzabqG"
+    "client_secret": "nILnr2Xj2cPu2AFer9JXe7mdXPzTincu"
   },
   "ti": {
     "block_ips": []
   },
   "debug": {
-    "skip_active_check": true
   }
 }

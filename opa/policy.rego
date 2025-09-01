@@ -21,7 +21,7 @@ introspection := resp if {
     "headers": {"Content-Type": "application/x-www-form-urlencoded"},
     "raw_body": sprintf("client_id=%v&client_secret=%v&token=%v",
       [data.keycloak.client_id, data.keycloak.client_secret, tok]),
-    "timeout": "2s"
+    "timeout": "5s"
   })
 }
 

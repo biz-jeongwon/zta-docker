@@ -13,6 +13,7 @@ services:
     command:
       - run
       - --server
+      - --addr=:8181
       - --config-file=/config/config.yaml
       - /policies
     volumes:
@@ -27,10 +28,10 @@ services:
   app:
     build: ./app
     ports:
-      - "5000:5000"
+      - "5001:5000"
 
   envoy:
-    image: envoyproxy/envoy:v1.29.4
+    image: envoyproxy/envoy:tools-dev-f384ab2b3e3aa0564ef25f57dc2ed8ad61eaf0cb
     volumes:
       - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
     ports:
